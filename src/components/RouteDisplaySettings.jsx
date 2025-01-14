@@ -2,6 +2,7 @@ import * as Tabs from '@radix-ui/react-tabs';
 import * as RadioGroup from '@radix-ui/react-radio-group';
 import { useEffect, useState } from 'react';
 import LedSignBoard from './LedSignBoard';
+import DisplaySettingsForm from './DisplaySettingsForm';
 
 const RouteDisplaySettings = () => {
 	const [routes, setRoutes] = useState([
@@ -14,7 +15,10 @@ const RouteDisplaySettings = () => {
 		},
 		{
 			id: 21,
-			name: '300/A',
+			routeNumber: '500',
+			source: 'shamshabad',
+			destination: 'mgbs',
+			via: 'aramghar',
 		},
 	]);
 	const [depots, setDepots] = useState([
@@ -52,23 +56,13 @@ const RouteDisplaySettings = () => {
 	};
 
 	const initialBoardConfig = {
-		scrollType: 'Fixedw',
+		scrollType: 'Fixed',
 		scrollSpeed: 24,
 		size: 'Full Screen',
 		bitMode: '8 bit',
 		languageId: 0,
 		text: '',
-		show: false,
-	};
-
-	const sideBoardConfig = {
-		scrollType: 'Fixedw',
-		scrollSpeed: 24,
-		size: 'Full Screen',
-		bitMode: '8 bit',
-		languageId: 0,
-		text: '',
-		show: true,
+		show: 'false',
 	};
 
 	const [displayConfig, setDisplayConfig] = useState({
@@ -79,10 +73,10 @@ const RouteDisplaySettings = () => {
 			via: { ...initialBoardConfig },
 		},
 		side: {
-			routeNumber: { ...initialBoardConfig, show: true },
-			source: { ...initialBoardConfig, show: false },
+			routeNumber: { ...initialBoardConfig },
+			source: { ...initialBoardConfig },
 			destination: { ...initialBoardConfig },
-			via: { ...initialBoardConfig, show: true, scrollType: 'Fixeds' },
+			via: { ...initialBoardConfig },
 		},
 		rear: {
 			routeNumber: { ...initialBoardConfig },
@@ -114,24 +108,6 @@ const RouteDisplaySettings = () => {
 		}));
 	};
 
-	const handleScrollTypeChange = (board, value) => {
-		setScrollTypes((prev) => ({ ...prev, [board]: value }));
-	};
-
-	const [selectedFields, setSelectedFields] = useState({
-		front: 'routeNumber',
-		side: 'routeNumber',
-		rear: 'routeNumber',
-		internal: 'routeNumber',
-	});
-
-	const [scrollTypes, setScrollTypes] = useState({
-		front: initialBoardConfig.scrollType,
-		side: initialBoardConfig.scrollType,
-		rear: initialBoardConfig.scrollType,
-		internal: initialBoardConfig.scrollType,
-	});
-
 	const saveDisplayConfig = () => {
 		const payload = {
 			routeId: selectedRoute.id,
@@ -154,153 +130,35 @@ const RouteDisplaySettings = () => {
 			});
 			return newConfig;
 		});
-
-		console.log('====================================');
-		console.log(displayConfig);
-		console.log('====================================');
 	}, [selectedRoute]);
 
-	const DisplayConfigSection = ({ board, field }) => (
-		<div className="">
-			<div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
-				<div className="flex flex-col gap-3">
-					<label className="text-sm font-semibold text-neutral-900">
-						Display Text
-					</label>
-					<input
-						type="text"
-						// defaultValue={selectedRoute[field]}
-						defaultValue={displayConfig[board][field].text}
-						onChange={(e) =>
-							handleDisplayConfigChange(board, field, 'text', e.target.value)
-						}
-						placeholder={`Enter ${field} text`}
-						className="border text-neutral-400 text-sm p-2 rounded-lg"
-					/>
-				</div>
-				<div className="flex flex-col gap-3">
-					<label className="text-sm font-semibold text-neutral-900">
-						Scroll Type
-					</label>
-					<select
-						value={scrollTypes[board]}
-						onChange={(e) =>
-							handleDisplayConfigChange(
-								board,
-								field,
-								'scrollType',
-								e.target.value
-							)
-						}
-						className="border text-neutral-400 text-sm p-2 rounded-lg"
-					>
-						{displayOptions.scrollTypes.map((type) => (
-							<option key={type} value={type} className="text-gray-900">
-								{type}
-							</option>
-						))}
-					</select>
-				</div>
+	const onRouteChange = () => {
+		setDisplayConfig((prev) => {
+			const newConfig = { ...prev };
+			boards.forEach((board) => {
+				newConfig[board].routeNumber.text = selectedRoute.routeNumber;
+				newConfig[board].source.text = selectedRoute.source;
+				newConfig[board].destination.text = selectedRoute.destination;
+				newConfig[board].via.text = selectedRoute.via;
+			});
+			return newConfig;
+		});
+	};
 
-				<div className="flex flex-col gap-3">
-					<label className="text-sm font-semibold text-neutral-900">
-						Scroll Speed
-					</label>
-
-					<input
-						type="number"
-						defaultValue={displayConfig[board][field].scrollSpeed}
-						onChange={(e) =>
-							handleDisplayConfigChange(
-								board,
-								field,
-								'scrollSpeed',
-								e.target.value
-							)
-						}
-						placeholder={`Enter ${field} text`}
-						className="border text-neutral-400 text-sm p-2 rounded-lg"
-					/>
-					{/* <select
-							value={displayConfig[board][field].scrollSpeed}
-							onChange={(e) =>
-								handleDisplayConfigChange(
-									board,
-									field,
-									'scrollSpeed',
-									e.target.value
-								)
-							}
-							className="border text-neutral-400 text-sm p-2 rounded-lg"
-						>
-							{displayOptions.scrollSpeeds.map((speed) => (
-								<option key={speed} value={speed} className="text-gray-900">
-									{speed}
-								</option>
-							))}
-						</select> */}
-				</div>
-
-				<div className="flex flex-col gap-3">
-					<label className="text-sm font-semibold text-neutral-900">Size</label>
-					<select
-						value={displayConfig[board][field].size}
-						onChange={(e) =>
-							handleDisplayConfigChange(board, field, 'size', e.target.value)
-						}
-						className="border text-neutral-400 text-sm p-2 rounded-lg"
-					>
-						{displayOptions.sizes.map((size) => (
-							<option key={size} value={size} className="text-gray-900">
-								{size}
-							</option>
-						))}
-					</select>
-				</div>
-				<div className="flex flex-col gap-3">
-					<label className="text-sm font-semibold text-neutral-900">
-						Bit Mode
-					</label>
-					<select
-						value={displayConfig[board][field].bitMode}
-						onChange={(e) =>
-							handleDisplayConfigChange(board, field, 'bitMode', e.target.value)
-						}
-						className="border text-neutral-400 text-sm p-2 rounded-lg"
-					>
-						{displayOptions.bitModes.map((mode) => (
-							<option key={mode} value={mode} className="text-gray-900">
-								{mode}
-							</option>
-						))}
-					</select>
-				</div>
-				<div className="flex flex-col gap-3">
-					<label className="text-sm font-semibold text-neutral-900">
-						Language
-					</label>
-					<select
-						value={displayConfig[board][field].language}
-						onChange={(e) =>
-							handleDisplayConfigChange(
-								board,
-								field,
-								'language',
-								e.target.value
-							)
-						}
-						className="border text-neutral-400 text-sm p-2 rounded-lg"
-					>
-						{displayOptions.languages.map((lang) => (
-							<option key={lang} value={lang} className="text-gray-900">
-								{lang}
-							</option>
-						))}
-					</select>
-				</div>
-			</div>
-		</div>
-	);
+	const onConfigChange = (board, field, key, value) => {
+		console.log('====================================');
+		console.log('====================================');
+		setDisplayConfig((prev) => ({
+			...prev,
+			[board]: {
+				...prev[board],
+				[field]: {
+					...prev[board][field],
+					[key]: value,
+				},
+			},
+		}));
+	};
 
 	return (
 		<div className="flex flex-col gap-4 px-6 py-6 shadow-sm bg-white w-full items-start rounded-lg border">
@@ -337,20 +195,24 @@ const RouteDisplaySettings = () => {
 						name="depotId"
 						className="border text-neutral-400 text-sm p-2 rounded-lg"
 						required
-						onChange={({ target }) =>
-							setSelectedRoute(JSON.parse(target.value))
-						}
+						onChange={({ target }) => {
+							setSelectedRoute(JSON.parse(target.value));
+							onRouteChange();
+						}}
 					>
 						{routes.map((route) => (
 							<option key={route.id} value={JSON.stringify(route)}>
-								{route.name}
+								{route.routeNumber}
 							</option>
 						))}
 					</select>
 				</div>
 			</div>
 
-			<LedSignBoard side={displayConfig.side} />
+			<DisplaySettingsForm
+				onFormUpdate={onConfigChange}
+				config={displayConfig}
+			/>
 		</div>
 	);
 };

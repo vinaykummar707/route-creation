@@ -129,8 +129,26 @@
 	font-weight: normal;
 }
 
+.marquee-left span {
+	display: inline-block;
+	font-family: 'Bus Stop', monospace;
+	font-size: 30px;
+	text-transform: uppercase;
+	color: #ffa500;
+	text-shadow: 0 0 10px rgba(255, 165, 0, 0.8), 0 0 20px rgba(255, 165, 0, 0.4);
+	letter-spacing: 2px;
+	position: relative;
+	z-index: 3;
+	white-space: nowrap;
+	font-weight: normal;
+}
+
 .marquee:not(.paused) span {
 	animation: marquee var(--scroll-speed, 10s) linear infinite;
+}
+
+.marquee-left:not(.paused) span {
+	animation: marquee-left var(--scroll-speed, 10s) linear infinite;
 }
 
 .marquee.paused {
@@ -158,6 +176,15 @@
 	}
 	100% {
 		transform: translateX(-100%);
+	}
+}
+
+@keyframes marquee-left {
+	0% {
+		transform: translateX(-100%);
+	}
+	100% {
+		transform: translateX(100%);
 	}
 }
 

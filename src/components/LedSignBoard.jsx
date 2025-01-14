@@ -1,42 +1,43 @@
 import { useEffect, useState } from 'react';
 import './LedSignBoard.css';
 
-const LedSignBoard = ({
-	initialBusNumber,
-	initialTopText,
-	initialBottomText,
-	upperHalfScrollSpeed,
-	lowerHalfScrollSpeed,
-	upperHalfScrollType,
-	lowerHalfScrollType,
-	side,
-}) => {
-	const { routeNumber, source, destination, via } = side;
+const LedSignBoard = ({ config, selectedTab }) => {
+	// const { routeNumber, source, destination, via } = config[selectedTab];
 
 	const [busNumber, setBusNumber] = useState();
 	const [topText, setTopText] = useState();
 	const [bottomText, setBottomText] = useState();
 	const [topScrollSpeed, setTopScrollSpeed] = useState();
 	const [bottomScrollSpeed, setBottomScrollSpeed] = useState();
-	const [topScrollEnabled, setTopScrollEnabled] = useState(false);
-	const [bottomScrollEnabled, setBottomScrollEnabled] = useState(false);
+	const [topScrollEnabled, setTopScrollEnabled] = useState();
+	const [bottomScrollEnabled, setBottomScrollEnabled] = useState();
 
 	useEffect(() => {
-		console.log('====================================');
-		console.log(routeNumber, source, destination, via);
-		console.log('====================================');
-		if (source.scrollType !== 'Fixed' && upperHalfScrollType !== 'Flashing') {
+		if (
+			config[selectedTab]['source'].scrollType === 'Fixed' ||
+			config[selectedTab]['source'].scrollType === 'Flashing'
+		) {
+			setTopScrollEnabled(false);
+		} else {
 			setTopScrollEnabled(true);
 		}
-		if (via.scrollType !== 'Fixed' && lowerHalfScrollType !== 'Flashing') {
+		if (
+			config[selectedTab]['via'].scrollType === 'Fixed' ||
+			config[selectedTab]['via'].scrollType === 'Flashing'
+		) {
+			setBottomScrollEnabled(false);
+		} else {
 			setBottomScrollEnabled(true);
 		}
-		setBusNumber(routeNumber.text);
-		setTopText(`${source.text} - ${destination.text}`);
-		setBottomText(via.text);
-		setTopScrollSpeed(source.scrollSpeed);
-		setBottomScrollSpeed(via.scrollSpeed);
-	}, [side]);
+		setBusNumber(config[selectedTab]['routeNumber'].text);
+		setTopText(
+			`${config[selectedTab]['source'].text} - ${config[selectedTab]['destination'].text}`
+		);
+		setBottomText(config[selectedTab]['via'].text);
+		setTopScrollSpeed(config[selectedTab]['source'].scrollSpeed);
+		setBottomScrollSpeed(config[selectedTab]['via'].scrollSpeed);
+		console.log(config[selectedTab]['source'].scrollType);
+	}, [config, selectedTab]);
 
 	// Convert speed value (1-10) to seconds (faster = fewer seconds)
 	const convertSpeedToSeconds = (speed) => (10 - speed) * 2;
@@ -50,19 +51,125 @@ const LedSignBoard = ({
 	// 	}
 	// }, [upperHalfScrollType, lowerHalfScrollType]);
 
+	if (config[selectedTab]['routeNumber'].size === 'Full Screen') {
+		return (
+			<div className="w-full mt-8">
+				<div className="led-sign-board">
+					{config[selectedTab]['routeNumber'].show === 'true' && (
+						<div className="left-half">
+							<div className="led-display">{busNumber}</div>
+						</div>
+					)}
+					{/* <div className="right-half">
+						{config[selectedTab]['source'].show === 'true' && (
+							<div className="top-section">
+								<div
+									className={`${
+										config[selectedTab]['source'].scrollType === 'Left to Right'
+											? 'marquee-left'
+											: 'marquee'
+									} ${!topScrollEnabled ? 'paused' : ''}`}
+									style={{
+										'--scroll-speed': `${topScrollSpeed}s`,
+									}}
+								>
+									<span>{topText}</span>
+								</div>
+							</div>
+						)}
+						{config[selectedTab]['via'].show === 'true' && (
+							<div className="bottom-section">
+								<div
+									className={`${
+										config[selectedTab]['via'].scrollType === 'Left to Right'
+											? 'marquee-left'
+											: 'marquee'
+									} ${!bottomScrollEnabled ? 'paused' : ''}`}
+									style={{
+										'--scroll-speed': `${bottomScrollSpeed}s`,
+									}}
+								>
+									<span>{bottomText}</span>
+								</div>
+							</div>
+						)}
+					</div> */}
+				</div>
+			</div>
+		);
+	}
+
+	if (config[selectedTab]['source'].size === 'Full Screen') {
+		return (
+			<div className="w-full mt-8">
+				<div className="led-sign-board">
+					<div className="right-half">
+						{config[selectedTab]['source'].show === 'true' && (
+							<div className="bottom-section">
+								<div
+									className={`${
+										config[selectedTab]['source'].scrollType === 'Left to Right'
+											? 'marquee-left'
+											: 'marquee'
+									} ${!bottomScrollEnabled ? 'paused' : ''}`}
+									style={{
+										'--scroll-speed': `${bottomScrollSpeed}s`,
+									}}
+								>
+									<span>{topText}</span>
+								</div>
+							</div>
+						)}
+					</div>
+				</div>
+			</div>
+		);
+	}
+
+	if (config[selectedTab]['via'].size === 'Full Screen') {
+		return (
+			<div className="w-full mt-8">
+				<div className="led-sign-board">
+					<div className="right-half">
+						{config[selectedTab]['via'].show === 'true' && (
+							<div className="bottom-section">
+								<div
+									className={`${
+										config[selectedTab]['via'].scrollType === 'Left to Right'
+											? 'marquee-left'
+											: 'marquee'
+									} ${!bottomScrollEnabled ? 'paused' : ''}`}
+									style={{
+										'--scroll-speed': `${bottomScrollSpeed}s`,
+									}}
+								>
+									<span>{bottomText}</span>
+								</div>
+							</div>
+						)}
+					</div>
+				</div>
+			</div>
+		);
+	}
+
 	return (
 		<div className="w-full mt-8">
 			<div className="led-sign-board">
-				{routeNumber.show && (
+				{config[selectedTab]['routeNumber'].show === 'true' && (
 					<div className="left-half">
 						<div className="led-display">{busNumber}</div>
 					</div>
 				)}
 				<div className="right-half">
-					{source.show && (
+					{config[selectedTab]['source'].show === 'true' && (
 						<div className="top-section">
 							<div
-								className={`marquee ${!topScrollEnabled ? 'paused' : ''}`}
+								className={`${
+									config[selectedTab]['source'].scrollType === 'Left to Right'
+										? 'marquee-left'
+										: 'marquee'
+								} ${!topScrollEnabled ? 'paused' : ''}`}
 								style={{
 									'--scroll-speed': `${topScrollSpeed}s`,
 								}}
@@ -71,10 +178,14 @@ const LedSignBoard = ({
 							</div>
 						</div>
 					)}
-					{via.show && (
+					{config[selectedTab]['via'].show === 'true' && (
 						<div className="bottom-section">
 							<div
-								className={`marquee ${!bottomScrollEnabled ? 'paused' : ''}`}
+								className={`${
+									config[selectedTab]['via'].scrollType === 'Left to Right'
+										? 'marquee-left'
+										: 'marquee'
+								} ${!bottomScrollEnabled ? 'paused' : ''}`}
 								style={{
 									'--scroll-speed': `${bottomScrollSpeed}s`,
 								}}
