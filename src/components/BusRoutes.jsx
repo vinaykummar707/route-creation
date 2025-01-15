@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
 import { getDepos } from '../services/api';
 
-const BusRoutes = () => {
+const BusRoutes = ({onBusSave}) => {
 	const [route, setRoute] = useState({
 		routeNumber: '',
 		source: '',
 		destination: '',
 		separation: '',
 		via: '',
-		depotId: '20',
 	});
 
 	useEffect(() => {
@@ -29,16 +28,17 @@ const BusRoutes = () => {
 	};
 
 	const saveRoute = () => {
-		const payload = {
-			organizationId: 'a82198cb-1861-4d13-bda7-3af36a8ea32c',
-			routeNumber: route.routeNumber,
-			source: route.source,
-			destination: route.destination,
-			separation: route.separation,
-			depotId: route.depotId,
-			via: route.via,
-		};
-		createRouteApiCall(payload);
+		// const payload = {
+		// 	organizationId: 'a82198cb-1861-4d13-bda7-3af36a8ea32c',
+		// 	routeNumber: route.routeNumber,
+		// 	source: route.source,
+		// 	destination: route.destination,
+		// 	separation: route.separation,
+		// 	depotId: route.depotId,
+		// 	via: route.via,
+		// };
+		// createRouteApiCall(payload);
+		onBusSave(route)
 	};
 
 	const createRouteApiCall = async (payload) => {
@@ -64,20 +64,7 @@ const BusRoutes = () => {
 			<div className="flex flex-col gap-4 p-4 bg-white w-full items-start rounded-lg border">
 				<h1 className="text-lg font-bold">Create Route</h1>
 				<div className=" grid grid-cols-3  w-full gap-4 ">
-					<div className="flex flex-col gap-1">
-						<label className="text-sm text-neutral-500" htmlFor="">
-							Depot
-						</label>
-						<select
-							name="depotId"
-							defaultValue={20}
-							onChange={handleRouteChange}
-							className=" w-full border px-3 py-2 rounded-md border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-gray-900"
-							required
-						>
-							<option value={20}>20</option>
-						</select>
-					</div>
+					
 					<div className="flex flex-col gap-1">
 						<label className="text-sm text-neutral-500" htmlFor="">
 							Route Number
@@ -153,7 +140,7 @@ const BusRoutes = () => {
 					onClick={saveRoute}
 					className="bg-neutral-900 text-sm p-2 text-white rounded-lg"
 				>
-					Save Route
+					Update Route Settings
 				</button>
 			</div>
 		</div>

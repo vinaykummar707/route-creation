@@ -246,7 +246,7 @@ const DisplaySettingsForm = ({ config, onFormUpdate }) => {
             /> */}
             <FullScreenBoard
               text="MEHDIPATNAM - UPPAL"
-              scrollType="Left To Right"
+              scrollType="Fixed"
               scrollSpeed={5}
             />
             <SideWithSingleTextBoard
@@ -257,7 +257,10 @@ const DisplaySettingsForm = ({ config, onFormUpdate }) => {
             />
 
             <SideWithTwoHalfsBoard
-              
+              bottomScrollType="Fixed"
+              bottomText="Via Aramghar, LB Nagar"
+              topScrollType="Fixed"
+              topText="Mehdipatnam - uppal"
             />
           </Tabs.Content>
         ))}

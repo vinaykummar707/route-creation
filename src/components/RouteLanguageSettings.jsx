@@ -1,35 +1,6 @@
 import { useState } from 'react';
 
-const RouteLanguageSettings = () => {
-	const [routes, setRoutes] = useState([
-		{
-			id: 20,
-			name: '300',
-		},
-		{
-			id: 21,
-			name: '300/A',
-		},
-	]);
-	const [depots, setDepots] = useState([
-		{
-			id: 31,
-			name: 'Mahabubnagar',
-		},
-		{
-			id: 30,
-			name: 'Uppal',
-		},
-	]);
-	const [selectedDepot, setSelectedDepot] = useState({
-		id: 31,
-		name: 'Mahabubnagar',
-	});
-	const [selectedRoute, setSelectedRoute] = useState({
-		id: 20,
-		name: '300',
-	});
-
+const RouteLanguageSettings = ({ onLanguageSave }) => {
 	const languageOptions = {
 		languages: [
 			'English',
@@ -41,52 +12,52 @@ const RouteLanguageSettings = () => {
 			'Kannada',
 			'Malayalam',
 		],
-		fontFamilies: ['Arial', 'Times New Roman', 'Helvetica', 'Courier New'],
 		fontSize: 20,
-		fontWeights: ['normal', 'medium', 'semi-bold', 'bold'],
+		fontWeights: ['regular', 'bold'],
 	};
 
 	const [languageConfig, setLanguageConfig] = useState([
 		{
-			language: 'Marathi',
-			fontFamily: 'Arial',
+			language: 'English',
 			fontSize: 16,
 			fontWeight: 'medium',
 		},
 		{
 			language: 'Hindi',
-			fontFamily: 'Arial',
 			fontSize: 16,
 			fontWeight: '400',
 		},
 		{
-			language: 'Marathi',
-			fontFamily: 'Arial',
+			language: 'Telugu',
 			fontSize: 16,
 			fontWeight: '400',
 		},
 	]);
 
 	const handleLanguageConfigChange = (index, field, value) => {
-		setLanguageConfig((prev) => {
-			const newConfig = [...prev];
-			newConfig[index] = {
-				...newConfig[index],
-				[field]: value,
-			};
-			return newConfig;
-		});
+		if (field === 'fontSize') {
+			setLanguageConfig((prev) => {
+				const newConfig = [...prev];
+				newConfig[index] = {
+					...newConfig[index],
+					[field]: Number(value),
+				};
+				return newConfig;
+			});
+		} else {
+			setLanguageConfig((prev) => {
+				const newConfig = [...prev];
+				newConfig[index] = {
+					...newConfig[index],
+					[field]: value,
+				};
+				return newConfig;
+			});
+		}
 	};
 
 	const saveLanguageSettings = () => {
-		const payload = {
-			routeId: selectedRoute.id,
-			depotId: selectedDepot.id,
-			languageConfig,
-		};
-		console.log('====================================');
-		console.log(payload);
-		console.log('====================================');
+		onLanguageSave(languageConfig);
 	};
 
 	return (
@@ -95,59 +66,11 @@ const RouteLanguageSettings = () => {
 				<h1 className="text-lg text-neutral-800 font-bold">
 					Route Language Settings
 				</h1>
-				<div className=" grid sm:grid-cols-2  md:grid-cols-4 w-full gap-4 ">
-					<div className="flex flex-col gap-3">
-						<label
-							className="text-sm font-semibold text-neutral-900"
-							htmlFor=""
-						>
-							Depot
-						</label>
-						<select
-							name="depotId"
-							className="border text-neutral-400 text-sm font-normal p-2 rounded-lg"
-							required
-							onChange={({ target }) => {
-								console.log(target.value);
-								setSelectedDepot(JSON.parse(target.value));
-							}}
-						>
-							{depots.map((depot) => (
-								<option key={depot.id} value={JSON.stringify(depot)}>
-									{depot.name}
-								</option>
-							))}
-						</select>
-					</div>
-
-					<div className="flex flex-col gap-3">
-						<label
-							className="text-sm font-semibold text-neutral-900"
-							htmlFor=""
-						>
-							Route
-						</label>
-						<select
-							name="depotId"
-							className="border text-neutral-400 text-sm p-2 rounded-lg"
-							required
-							onChange={({ target }) =>
-								setSelectedRoute(JSON.parse(target.value))
-							}
-						>
-							{routes.map((route) => (
-								<option key={route.id} value={JSON.stringify(route)}>
-									{route.name}
-								</option>
-							))}
-						</select>
-					</div>
-				</div>
 
 				{languageConfig.map((config, index) => (
 					<div
 						key={index}
-						className=" grid sm:grid-cols-2  md:grid-cols-4  w-full gap-4 "
+						className=" grid sm:grid-cols-3  md:grid-cols-4  w-full gap-4 "
 					>
 						<div className="flex flex-col gap-3">
 							<label
@@ -158,9 +81,9 @@ const RouteLanguageSettings = () => {
 							</label>
 							<select
 								name="language"
-								defaultValue={config.language}
 								className="border text-neutral-400 text-sm p-2 rounded-lg"
 								required
+								defaultValue={config.language}
 								onChange={(e) =>
 									handleLanguageConfigChange(index, 'language', e.target.value)
 								}
@@ -173,7 +96,7 @@ const RouteLanguageSettings = () => {
 							</select>
 						</div>
 
-						<div className="flex flex-col gap-3">
+						{/* <div className="flex flex-col gap-3">
 							<label
 								className="text-sm font-semibold text-neutral-900"
 								htmlFor=""
@@ -199,7 +122,7 @@ const RouteLanguageSettings = () => {
 									</option>
 								))}
 							</select>
-						</div>
+						</div> */}
 
 						<div className="flex flex-col gap-3">
 							<label
@@ -210,9 +133,9 @@ const RouteLanguageSettings = () => {
 							</label>
 							<select
 								name="fontWeight"
-								defaultValue={config.fontWeight}
 								className="border text-neutral-400 text-sm p-2 rounded-lg"
 								required
+								defaultValue={config.fontWeight}
 								onChange={(e) =>
 									handleLanguageConfigChange(
 										index,
@@ -237,9 +160,11 @@ const RouteLanguageSettings = () => {
 								Font Size
 							</label>
 							<input
+								min={6}
+								max={16}
 								name="fontSize"
 								type="number"
-								value={config.fontSize}
+								defaultValue={config.fontSize}
 								className="border text-neutral-400 text-sm p-2 rounded-lg"
 								onChange={(e) =>
 									handleLanguageConfigChange(index, 'fontSize', e.target.value)
@@ -253,7 +178,7 @@ const RouteLanguageSettings = () => {
 					onClick={saveLanguageSettings}
 					className="bg-neutral-900 text-sm p-2 text-white rounded-lg"
 				>
-					Save Language Settings
+					Update Language Settings
 				</button>
 			</div>
 		</div>
