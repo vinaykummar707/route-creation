@@ -1,102 +1,47 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-const RouteLanguageSettings = ({ onLanguageSave }) => {
-	const languageOptions = {
-		languages: [
-			'English',
-			'Hindi',
-			'Marathi',
-			'Gujarati',
-			'Tamil',
-			'Telugu',
-			'Kannada',
-			'Malayalam',
-		],
-		fontSize: 20,
-		fontWeights: ['regular', 'bold'],
-	};
+const RouteLanguageSettings = ({
+  languageOptions,
+  languageConfig,
+  handleLanguageConfigChange,
+}) => {
+  return (
+    <div className="">
+      <div className="flex flex-col gap-8 p-4 bg-white w-full items-start rounded-lg border">
+        <h1 className="text-lg text-neutral-800 font-bold">
+          Route Language Settings
+        </h1>
 
-	const [languageConfig, setLanguageConfig] = useState([
-		{
-			language: 'English',
-			fontSize: 16,
-			fontWeight: 'medium',
-		},
-		{
-			language: 'Hindi',
-			fontSize: 16,
-			fontWeight: '400',
-		},
-		{
-			language: 'Telugu',
-			fontSize: 16,
-			fontWeight: '400',
-		},
-	]);
+        {languageConfig.map((config, index) => (
+          <div
+            key={index}
+            className=" grid sm:grid-cols-3  md:grid-cols-4  w-full gap-4 "
+          >
+            <div className="flex flex-col gap-3">
+              <label
+                className="text-sm font-semibold text-neutral-900"
+                htmlFor=""
+              >
+                {`Language ${index + 1}`}
+              </label>
+              <select
+                name="language"
+                className="border text-neutral-400 text-sm p-2 rounded-lg"
+                required
+                defaultValue={config.language}
+                onChange={(e) =>
+                  handleLanguageConfigChange(index, "language", e.target.value)
+                }
+              >
+                {languageOptions.languages.map((language) => (
+                  <option key={language} value={language}>
+                    {language}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-	const handleLanguageConfigChange = (index, field, value) => {
-		if (field === 'fontSize') {
-			setLanguageConfig((prev) => {
-				const newConfig = [...prev];
-				newConfig[index] = {
-					...newConfig[index],
-					[field]: Number(value),
-				};
-				return newConfig;
-			});
-		} else {
-			setLanguageConfig((prev) => {
-				const newConfig = [...prev];
-				newConfig[index] = {
-					...newConfig[index],
-					[field]: value,
-				};
-				return newConfig;
-			});
-		}
-	};
-
-	const saveLanguageSettings = () => {
-		onLanguageSave(languageConfig);
-	};
-
-	return (
-		<div className="">
-			<div className="flex flex-col gap-8 p-4 bg-white w-full items-start rounded-lg border">
-				<h1 className="text-lg text-neutral-800 font-bold">
-					Route Language Settings
-				</h1>
-
-				{languageConfig.map((config, index) => (
-					<div
-						key={index}
-						className=" grid sm:grid-cols-3  md:grid-cols-4  w-full gap-4 "
-					>
-						<div className="flex flex-col gap-3">
-							<label
-								className="text-sm font-semibold text-neutral-900"
-								htmlFor=""
-							>
-								{`Language ${index + 1}`}
-							</label>
-							<select
-								name="language"
-								className="border text-neutral-400 text-sm p-2 rounded-lg"
-								required
-								defaultValue={config.language}
-								onChange={(e) =>
-									handleLanguageConfigChange(index, 'language', e.target.value)
-								}
-							>
-								{languageOptions.languages.map((language) => (
-									<option key={language} value={language}>
-										{language}
-									</option>
-								))}
-							</select>
-						</div>
-
-						{/* <div className="flex flex-col gap-3">
+            {/* <div className="flex flex-col gap-3">
 							<label
 								className="text-sm font-semibold text-neutral-900"
 								htmlFor=""
@@ -124,65 +69,58 @@ const RouteLanguageSettings = ({ onLanguageSave }) => {
 							</select>
 						</div> */}
 
-						<div className="flex flex-col gap-3">
-							<label
-								className="text-sm font-semibold text-neutral-900"
-								htmlFor=""
-							>
-								Font Weight
-							</label>
-							<select
-								name="fontWeight"
-								className="border text-neutral-400 text-sm p-2 rounded-lg"
-								required
-								defaultValue={config.fontWeight}
-								onChange={(e) =>
-									handleLanguageConfigChange(
-										index,
-										'fontWeight',
-										e.target.value
-									)
-								}
-							>
-								{languageOptions.fontWeights.map((weight) => (
-									<option key={weight} value={weight}>
-										{weight}
-									</option>
-								))}
-							</select>
-						</div>
+            <div className="flex flex-col gap-3">
+              <label
+                className="text-sm font-semibold text-neutral-900"
+                htmlFor=""
+              >
+                Font Weight
+              </label>
+              <select
+                name="fontWeight"
+                className="border text-neutral-400 text-sm p-2 rounded-lg"
+                required
+                defaultValue={config.fontWeight}
+                onChange={(e) =>
+                  handleLanguageConfigChange(
+                    index,
+                    "fontWeight",
+                    e.target.value
+                  )
+                }
+              >
+                {languageOptions.fontWeights.map((weight) => (
+                  <option key={weight} value={weight}>
+                    {weight}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-						<div className="flex flex-col gap-3">
-							<label
-								className="text-sm font-semibold text-neutral-900"
-								htmlFor=""
-							>
-								Font Size
-							</label>
-							<input
-								min={6}
-								max={16}
-								name="fontSize"
-								type="number"
-								defaultValue={config.fontSize}
-								className="border text-neutral-400 text-sm p-2 rounded-lg"
-								onChange={(e) =>
-									handleLanguageConfigChange(index, 'fontSize', e.target.value)
-								}
-							/>
-						</div>
-					</div>
-				))}
-
-				<button
-					onClick={saveLanguageSettings}
-					className="bg-neutral-900 text-sm p-2 text-white rounded-lg"
-				>
-					Update Language Settings
-				</button>
-			</div>
-		</div>
-	);
+            <div className="flex flex-col gap-3">
+              <label
+                className="text-sm font-semibold text-neutral-900"
+                htmlFor=""
+              >
+                Font Size
+              </label>
+              <input
+                min={6}
+                max={16}
+                name="fontSize"
+                type="number"
+                defaultValue={config.fontSize}
+                className="border text-neutral-400 text-sm p-2 rounded-lg"
+                onChange={(e) =>
+                  handleLanguageConfigChange(index, "fontSize", e.target.value)
+                }
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default RouteLanguageSettings;

@@ -1,146 +1,123 @@
-[
-	{
-		"routeNumber": "40",
-		"source": "uppal",
-		"destination": "ameerpet",
-		"separation": "-",
-		"via": "via lakdikapul, masabtank",
-		"displayConfig": {
-			"english": {
-				"front": {
-					"boardFormatType": "SideWithTwoText",
-					"upperHalftext": "uppal - ameerpet",
-					"lowerHalfText": "via uppal",
-					"sideText": "500",
-					"upperHalfScrollType": "Fixed",
-					"upperHalfScrollSpeed": 24,
-					"lowerHalfScrollType": "Fixed",
-					"lowerHalfScrollSpeed": 24,
-					"upperHalfTextPosition": "center",
-					"lowerHalfTextPosition": "center"
-				},
-				"side": {
-					"boardFormatType": "Fullscreen",
-					"text": "uppal - ameerpet",
-					"textPosition": "center",
-					"scrollType": "Fixed",
-					"scrollSpeed": 6
-				}
-			},
-			"hindi": {
-				"front": {
-					"boardFormatType": "SideWithTwoText",
-					"upperHalftext": "उप्पल - अमीरपेट",
-					"lowerHalfText": "via उप्पल",
-					"sideText": "300",
-					"upperHalfScrollType": "Fixed",
-					"upperHalfScrollSpeed": 24,
-					"lowerHalfScrollType": "Fixed",
-					"lowerHalfScrollSpeed": 24,
-					"upperHalfTextPosition": "center",
-					"lowerHalfTextPosition": "center"
-				},
-				"side": {
-					"boardFormatType": "Fullscreen",
-					"text": "उप्पल - अमीरपेट",
-					"textPosition": "center",
-					"scrollType": "Fixed",
-					"scrollSpeed": 6
-				}
-			},
-			"telugu": {
-				"front": {
-					"boardFormatType": "SideWithTwoText",
-					"upperHalftext": "ఉప్పల్ - అమీర్‌పేట",
-					"lowerHalfText": "via ఉప్పల్",
-					"sideText": "300",
-					"upperHalfScrollType": "Fixed",
-					"upperHalfScrollSpeed": 24,
-					"lowerHalfScrollType": "Fixed",
-					"lowerHalfScrollSpeed": 24,
-					"upperHalfTextPosition": "center",
-					"lowerHalfTextPosition": "center"
-				},
-				"side": {
-					"boardFormatType": "Fullscreen",
-					"text": "ఉప్పల్ - అమీర్‌పేట",
-					"textPosition": "center",
-					"scrollType": "Fixed",
-					"scrollSpeed": 6
-				}
-			}
-		}
-	},
-	{
-		"routeNumber": "500",
-		"source": "shamshabad",
-		"destination": "secunderabad",
-		"separation": "-",
-		"via": "via lakdikapul, masabtank",
-		"displayConfig": {
-			"english": {
-				"front": {
-					"boardFormatType": "SideWithTwoText",
-					"upperHalftext": "shamshabad - secunderabad",
-					"lowerHalfText": "via uppal",
-					"sideText": "500",
-					"upperHalfScrollType": "Fixed",
-					"upperHalfScrollSpeed": 24,
-					"lowerHalfScrollType": "Fixed",
-					"lowerHalfScrollSpeed": 24,
-					"upperHalfTextPosition": "center",
-					"lowerHalfTextPosition": "center"
-				},
-				"side": {
-					"boardFormatType": "Fullscreen",
-					"text": "shamshabad - seunderabad",
-					"textPosition": "center",
-					"scrollType": "Fixed",
-					"scrollSpeed": 6
-				}
-			},
-			"hindi": {
-				"front": {
-					"boardFormatType": "SideWithTwoText",
-					"upperHalftext": "शमसाबाद - सिकंदराबाद",
-					"lowerHalfText": "via उप्पल",
-					"sideText": "300",
-					"upperHalfScrollType": "Fixed",
-					"upperHalfScrollSpeed": 24,
-					"lowerHalfScrollType": "Fixed",
-					"lowerHalfScrollSpeed": 24,
-					"upperHalfTextPosition": "center",
-					"lowerHalfTextPosition": "center"
-				},
-				"side": {
-					"boardFormatType": "Fullscreen",
-					"text": "शमसाबाद - सिकंदराबाद",
-					"textPosition": "center",
-					"scrollType": "Fixed",
-					"scrollSpeed": 6
-				}
-			},
-			"telugu": {
-				"front": {
-					"boardFormatType": "SideWithTwoText",
-					"upperHalftext": "శంషాబాద్ - సికింద్రాబాద్",
-					"lowerHalfText": "via ఉప్పల్",
-					"sideText": "300",
-					"upperHalfScrollType": "Fixed",
-					"upperHalfScrollSpeed": 24,
-					"lowerHalfScrollType": "Fixed",
-					"lowerHalfScrollSpeed": 24,
-					"upperHalfTextPosition": "center",
-					"lowerHalfTextPosition": "center"
-				},
-				"side": {
-					"boardFormatType": "Fullscreen",
-					"text": "శంషాబాద్ - సికింద్రాబాద్",
-					"textPosition": "center",
-					"scrollType": "Fixed",
-					"scrollSpeed": 6
-				}
-			}
-		}
-	}
-]
+{
+    "routeNumber": "123",
+    "source": "hyderabad",
+    "destination": "vijayawada",
+    "separation": "-",
+    "via": "guntur",
+    "displayConfig": {
+        "English": {
+            "front": {
+                "text": "hyderabad - vijayawada",
+                "scrollType": "Fixed",
+                "scrollSpeed": 0,
+                "position": "Center",
+                "boardFormatType": "Fullscreen",
+                "fontSize": 16,
+                "fontWeight": "regular"
+            },
+            "side": {
+                "text": "guntur",
+                "scrollType": "Fixed",
+                "scrollSpeed": 0,
+                "position": "Center",
+                "boardFormatType": "Fullscreen",
+                "fontSize": 16,
+                "fontWeight": "regular"
+            },
+            "rear": {
+                "text": "hyderabad - vijayawada",
+                "scrollType": "Fixed",
+                "scrollSpeed": 0,
+                "position": "Center",
+                "boardFormatType": "Fullscreen",
+                "fontSize": 16,
+                "fontWeight": "regular"
+            },
+            "internal": {
+                "text": "123",
+                "scrollType": "Fixed",
+                "scrollSpeed": 0,
+                "position": "Center",
+                "boardFormatType": "Fullscreen",
+                "fontSize": 16,
+                "fontWeight": "regular"
+            }
+        },
+        "Telugu": {
+            "front": {
+                "text": "హైదరాబాద్-విజయవాడ",
+                "scrollType": "Fixed",
+                "scrollSpeed": 0,
+                "position": "Center",
+                "boardFormatType": "Fullscreen",
+                "fontSize": 16,
+                "fontWeight": "regular"
+            },
+            "side": {
+                "text": "గుంటుర్",
+                "scrollType": "Fixed",
+                "scrollSpeed": 0,
+                "position": "Center",
+                "boardFormatType": "Fullscreen",
+                "fontSize": 16,
+                "fontWeight": "regular"
+            },
+            "rear": {
+                "text": "హైదరాబాద్-విజయవాడ",
+                "scrollType": "Fixed",
+                "scrollSpeed": 0,
+                "position": "Center",
+                "boardFormatType": "Fullscreen",
+                "fontSize": 16,
+                "fontWeight": "regular"
+            },
+            "internal": {
+                "text": "123",
+                "scrollType": "Fixed",
+                "scrollSpeed": 0,
+                "position": "Center",
+                "boardFormatType": "Fullscreen",
+                "fontSize": 16,
+                "fontWeight": "regular"
+            }
+        },
+        "Hindi": {
+            "front": {
+                "text": "हैदराबाद-विजयवाड़ा",
+                "scrollType": "Fixed",
+                "scrollSpeed": 0,
+                "position": "Center",
+                "boardFormatType": "Fullscreen",
+                "fontSize": 16,
+                "fontWeight": "regular"
+            },
+            "side": {
+                "text": "गुंटूर",
+                "scrollType": "Fixed",
+                "scrollSpeed": 0,
+                "position": "Center",
+                "boardFormatType": "Fullscreen",
+                "fontSize": 16,
+                "fontWeight": "regular"
+            },
+            "rear": {
+                "text": "हैदराबाद-विजयवाड़ा",
+                "scrollType": "Fixed",
+                "scrollSpeed": 0,
+                "position": "Center",
+                "boardFormatType": "Fullscreen",
+                "fontSize": 16,
+                "fontWeight": "regular"
+            },
+            "internal": {
+                "text": "123",
+                "scrollType": "Fixed",
+                "scrollSpeed": 0,
+                "position": "Center",
+                "boardFormatType": "Fullscreen",
+                "fontSize": 16,
+                "fontWeight": "regular"
+            }
+        }
+    }
+}

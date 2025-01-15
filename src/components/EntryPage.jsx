@@ -1,34 +1,209 @@
-import { useEffect, useState } from 'react';
-import BusRoutes from './BusRoutes';
-import RouteDisplaySettings from './RouteDisplaySettings';
-import RouteLanguageSettings from './RouteLanguageSettings';
+import { useEffect, useState } from "react";
+import BusRoutes from "./BusRoutes";
+import RouteDisplaySettings from "./RouteDisplaySettings";
+import RouteLanguageSettings from "./RouteLanguageSettings";
+import axios from "axios";
 
 const EntryPage = () => {
-	const [languageSettings, setLanguageSettings] = useState();
-	const [routeSettings, setRouteSettings] = useState();
-	const [displaySettings, setDisplaySettings] = useState();
+  const [route, setRoute] = useState({
+    routeNumber: "",
+    source: "",
+    destination: "",
+    separation: "",
+    via: "",
+  });
 
-	const onLanguageSave = (value) => setLanguageSettings(value);
-	const onRouteSave = (value) => setRouteSettings(value);
-	const onDisplaySettingsSave = (value) => setDisplaySettings(value);
+  const handleRouteChange = (e) => {
+    const { name, value } = e.target;
+    setRoute((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
-	useEffect(() => {
-		console.log(languageSettings);
-		console.log(routeSettings);
-		console.log(displaySettings);
-	});
+  const languageOptions = {
+    languages: [
+      "English",
+      "Hindi",
+      "Marathi",
+      "Gujarati",
+      "Tamil",
+      "Telugu",
+      "Kannada",
+      "Malayalam",
+    ],
+    fontSize: 20,
+    fontWeights: ["regular", "bold"],
+  };
 
-	return (
-		<>
-			<BusRoutes onBusSave={onRouteSave} />
-			<RouteLanguageSettings onLanguageSave={onLanguageSave} />
-			<RouteDisplaySettings
-				onSettingsSave={onDisplaySettingsSave}
-				languageSettings={languageSettings}
-				selectedRoute={routeSettings}
-			/>
-		</>
-	);
+  const [languageConfig, setLanguageConfig] = useState([
+    {
+      language: "English",
+      fontSize: 16,
+      fontWeight: "regular",
+    },
+    {
+      language: "Hindi",
+      fontSize: 16,
+      fontWeight: "regular",
+    },
+    {
+      language: "Telugu",
+      fontSize: 16,
+      fontWeight: "regular",
+    },
+  ]);
+
+  const handleLanguageConfigChange = (index, field, value) => {
+    if (field === "fontSize") {
+      setLanguageConfig((prev) => {
+        const newConfig = [...prev];
+        newConfig[index] = {
+          ...newConfig[index],
+          [field]: Number(value),
+        };
+        return newConfig;
+      });
+    } else {
+      setLanguageConfig((prev) => {
+        const newConfig = [...prev];
+        newConfig[index] = {
+          ...newConfig[index],
+          [field]: value,
+        };
+        return newConfig;
+      });
+    }
+  };
+
+  const languageMapping = {
+    English: "en", // ISO code for English
+    Hindi: "hi", // ISO code for Hindi
+    Telugu: "te", // ISO code for Telugu
+  };
+
+  const [displayConfig, setDisplayConfig] = useState({
+    front: {},
+    side: {},
+    rear: {},
+    internal: {},
+  });
+
+  const handleConfigChange = (display, config) => {
+    console.log(display, config);
+
+    setDisplayConfig((prev) => {
+      const newConfig = { ...prev };
+      newConfig[display] = config;
+      return newConfig;
+    });
+  };
+
+  useEffect(() => {
+    // console.log(route);
+    // console.log(languageConfig);
+    console.log(displayConfig);
+  }, [route, languageConfig, displayConfig]);
+
+  async function translateText(text, srcLang, destLang) {
+    const API_URL = "https://api.devnagri.com/machine-translation/v2/translate";
+    const API_KEY = "devnagri_9b97bc1ad2ff11efbac242010aa00fc7"; // Replace with your actual API key
+
+    try {
+      const formData = new FormData();
+      formData.append("key", API_KEY);
+      formData.append("sentence", text);
+      formData.append("src_lang", srcLang);
+      formData.append("dest_lang", destLang);
+
+      const response = await axios.post(API_URL, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      if (response.status === 200) {
+        return response.data.translated_text; // Return the translated text if success
+      } else {
+        console.error("Translation API Error:", response.data.msg);
+        return text; // Fallback to original text in case of error
+      }
+    } catch (error) {
+      console.error("API Request Failed:", error.message);
+      return text; // Fallback to original text
+    }
+  }
+
+  async function showFinalJson() {
+    // Use an empty object to accumulate the final config
+    const config = {};
+
+    // Iterate over the languageSettings to fetch the translated configurations
+    const configPromises = languageConfig.map(async (language) => {
+      const targetLanguage = languageMapping[language.language]; // Map language to ISO code
+
+      if (!targetLanguage) {
+        console.error(`No mapping found for language: ${language.language}`);
+        return null; // Skip if no mapping is found
+      }
+
+      const translatedConfig = {};
+
+      for (const key of Object.keys(displayConfig)) {
+        const originalText = displayConfig[key]?.text;
+        let translatedText = originalText;
+
+        if (originalText && targetLanguage !== "en" && isNaN(originalText)) {
+          // Call translation API only if the target language is not English
+          translatedText = await translateText(
+            originalText,
+            "en",
+            targetLanguage
+          );
+        }
+
+        translatedConfig[key] = {
+          ...displayConfig[key],
+          ...(originalText && { text: translatedText }), // Only update text if it's present
+          fontSize: language.fontSize,
+          fontWeight: language.fontWeight,
+        };
+      }
+
+      // Merge the translated config directly into the final config object
+      if (translatedConfig) {
+        config[language.language] = translatedConfig;
+      }
+    });
+
+    // Wait for all promises to resolve and then log the final config
+    await Promise.all(configPromises);
+
+    console.log({ ...route, displayConfig: config }); // The final config will be in the correct format now
+  }
+
+  return (
+    <>
+      <BusRoutes route={route} onRouteChange={handleRouteChange} />
+      <RouteLanguageSettings
+        languageOptions={languageOptions}
+        languageConfig={languageConfig}
+        handleLanguageConfigChange={handleLanguageConfigChange}
+      />
+      <RouteDisplaySettings
+        route={route}
+        displayConfig={displayConfig}
+        handleConfigChange={handleConfigChange}
+      />
+
+      <button
+        onClick={showFinalJson}
+        className="bg-indigo-600 text-sm p-3 self-start text-white rounded-lg"
+      >
+        Export To Json
+      </button>
+    </>
+  );
 };
 
 export default EntryPage;
