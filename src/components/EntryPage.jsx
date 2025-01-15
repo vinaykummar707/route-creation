@@ -22,16 +22,7 @@ const EntryPage = () => {
   };
 
   const languageOptions = {
-    languages: [
-      "English",
-      "Hindi",
-      "Marathi",
-      "Gujarati",
-      "Tamil",
-      "Telugu",
-      "Kannada",
-      "Malayalam",
-    ],
+    languages: ["English", "Hindi", "Marathi", "Telugu"],
     fontSize: 20,
     fontWeights: ["regular", "bold"],
   };
@@ -79,7 +70,8 @@ const EntryPage = () => {
   const languageMapping = {
     English: "en", // ISO code for English
     Hindi: "hi", // ISO code for Hindi
-    Telugu: "te", // ISO code for Telugu
+    Telugu: "te",
+    Marathi: "mr", // ISO code for Telugu
   };
 
   const [displayConfig, setDisplayConfig] = useState({
@@ -162,12 +154,20 @@ const EntryPage = () => {
           );
         }
 
-        translatedConfig[key] = {
-          ...displayConfig[key],
-          ...(originalText && { text: translatedText }), // Only update text if it's present
-          fontSize: language.fontSize,
-          fontWeight: language.fontWeight,
-        };
+        if (originalText) {
+          // Only include fontSize and fontWeight if text is present
+          translatedConfig[key] = {
+            ...displayConfig[key],
+            text: translatedText, // Always include text if present
+            fontSize: language.fontSize,
+            fontWeight: language.fontWeight,
+          };
+        } else {
+          // Include other properties without fontSize and fontWeight
+          translatedConfig[key] = {
+            ...displayConfig[key],
+          };
+        }
       }
 
       // Merge the translated config directly into the final config object
@@ -179,8 +179,34 @@ const EntryPage = () => {
     // Wait for all promises to resolve and then log the final config
     await Promise.all(configPromises);
 
-    console.log({ ...route, displayConfig: config }); // The final config will be in the correct format now
+    console.log({ ...route, displayConfig: config });
+    generateJson({ ...route, displayConfig: config }); // The final config will be in the correct format now
   }
+
+  const generateJson = (configData) => {
+    // Convert to JSON string with proper formatting
+    const jsonString = JSON.stringify(configData, null, 2);
+
+    // Create blob and download link
+    const blob = new Blob([jsonString], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+
+    // Create temporary link and trigger download
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `route_config_${route.routeNumber || "new"}_${
+      new Date().toISOString().split("T")[0]
+    }.json`;
+    document.body.appendChild(link);
+    link.click();
+
+    // Cleanup
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+
+    // Also log to console for reference
+    console.log("Configuration Saved:", configData);
+  };
 
   return (
     <>
