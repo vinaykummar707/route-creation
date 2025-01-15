@@ -6,7 +6,7 @@ const BusRoutes = ({ route, onRouteChange }) => {
     <div className="">
       <div className="flex flex-col gap-4 p-4 bg-white w-full items-start rounded-lg border">
         <h1 className="text-lg font-bold">Create Route</h1>
-        <div className=" grid grid-cols-3  w-full gap-4 ">
+        <div className="grid md:grid-cols-2 sm:grid-cols-1  w-full gap-4 ">
           <div className="flex flex-col gap-1">
             <label className="text-sm text-neutral-500" htmlFor="">
               Route Number

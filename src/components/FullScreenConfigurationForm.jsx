@@ -45,7 +45,7 @@ const ConfigurationForm = ({
 
   return (
     <div className="config-form w-full">
-      <form className="grid grid-cols-3 gap-3">
+      <form className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
         <div className="flex flex-col gap-3">
           <label className="text-sm font-semibold text-neutral-900">
             Text Type

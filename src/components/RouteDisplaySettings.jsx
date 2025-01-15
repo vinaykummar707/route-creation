@@ -19,9 +19,6 @@ const RouteDisplaySettings = ({ route, displayConfig, handleConfigChange }) => {
     boardDisplayFormats: ["Fullscreen"],
   };
 
-
-
-
   return (
     <div className="flex flex-col gap-4 px-6 py-6 shadow-sm bg-white w-full items-start rounded-lg border">
       <h1 className="text-lg text-neutral-800 font-bold">
@@ -42,9 +39,7 @@ const RouteDisplaySettings = ({ route, displayConfig, handleConfigChange }) => {
                 className="px-1 py-2 text-sm bg-white font-medium text-gray-500 hover:text-gray-800 focus:outline-none data-[state=active]:text-blue-600 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 data-[state=active]:font-medium"
               >
                 <div className="flex items-center space-x-2">
-                  <span>
-                    {board.charAt(0).toUpperCase() + board.slice(1)} Display
-                  </span>
+                  <span>{board.charAt(0).toUpperCase() + board.slice(1)}</span>
                 </div>
               </Tabs.Trigger>
             ))}
@@ -89,8 +84,6 @@ const RouteDisplaySettings = ({ route, displayConfig, handleConfigChange }) => {
       {/* <ConfigurationForm route={selectedRoute} />
 			<SideWithSingleTextBoardConfigurationForm route={selectedRoute} />
 			<SideWithTwoHalfsBoard /> */}
-
-     
     </div>
   );
 };

@@ -224,7 +224,7 @@ const EntryPage = () => {
 
       <button
         onClick={showFinalJson}
-        className="bg-indigo-600 text-sm p-3 self-start text-white rounded-lg"
+        className="bg-indigo-600 text-sm p-3 self-starts text-white rounded-lg"
       >
         Export To Json
       </button>
