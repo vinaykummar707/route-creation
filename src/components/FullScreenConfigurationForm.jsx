@@ -131,9 +131,7 @@ const ConfigurationForm = ({
         </div>
       </form>
 
-      <div className="preview">
-        <FullScreenBoard formData={formData} />
-      </div>
+    
 
       <button
         onClick={() => {
