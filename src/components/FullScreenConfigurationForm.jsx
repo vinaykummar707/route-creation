@@ -1,20 +1,16 @@
 import { useEffect, useState } from "react";
 import FullScreenBoard from "./FullScreenBoard";
 
-const ConfigurationForm = ({
-  route,
-  handleSave,
-  selectedTab,
-  displayConfig,
-}) => {
+const ConfigurationForm = ({ route, handleSave, selectedTab, configData }) => {
   const [selectedOption, setSelectedOption] = useState("");
 
-  const [formData, setFormData] = useState({
-    text: "Dummy",
-    scrollType: "Fixed",
-    scrollSpeed: 0,
-    position: "Center",
-  });
+  const [formData, setFormData] = useState();
+
+  useEffect(() => {
+    console.log(configData);
+
+    setFormData(configData);
+  }, [configData]);
 
   const onFormDateChange = (field, value) => {
     setFormData((prev) => {
@@ -66,18 +62,16 @@ const ConfigurationForm = ({
           </select>
         </div>
 
-        {selectedOption === "custom" && (
-          <div className="flex flex-col gap-3">
-            <label className="text-sm font-semibold text-neutral-900">
-              Custom Text
-            </label>
-            <input
-              value={formData.text}
-              onChange={({ target }) => onFormDateChange("text", target.value)}
-              className="border text-neutral-400 text-sm p-2 rounded-lg"
-            />
-          </div>
-        )}
+        <div className="flex flex-col gap-3">
+          <label className="text-sm font-semibold text-neutral-900">
+            Custom Text
+          </label>
+          <input
+            value={formData.text}
+            onChange={({ target }) => onFormDateChange("text", target.value)}
+            className="border text-neutral-400 text-sm p-2 rounded-lg"
+          />
+        </div>
 
         <div className="flex flex-col gap-3">
           <label className="text-sm font-semibold text-neutral-900">
@@ -130,8 +124,6 @@ const ConfigurationForm = ({
           />
         </div>
       </form>
-
-    
 
       <button
         onClick={() => {
