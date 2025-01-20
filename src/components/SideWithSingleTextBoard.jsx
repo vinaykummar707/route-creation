@@ -48,7 +48,7 @@
 import { useEffect, useState } from "react";
 import "./LedSignBoard.css";
 
-const SideWithSingleTextBoard = ({ formData }) => {
+const SideWithSingleTextBoard = ({ route, formData }) => {
   // const { routeNumber, source, destination, via } = config[selectedTab];
   const { sideText, text, scrollType, scrollSpeed, position } = formData;
 
@@ -91,11 +91,25 @@ const SideWithSingleTextBoard = ({ formData }) => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-ful">
       <div className="led-sign-board">
-        <div className="left-half">
-          <div className="led-display"> {sideText} </div>
-        </div>
+        {route.splitRoute && (
+          <div className="left-half flex flex-col">
+            <div className="top-section">
+              {" "}
+              <div className="led-display"> {formData.routeUpperHalfText} </div>
+            </div>
+            <div className="bottom-section border-t-2  border-yellow-400">
+              {" "}
+              <div className="led-display"> {formData.routeLowerHalfText} </div>
+            </div>
+          </div>
+        )}
+        {!route.splitRoute && (
+          <div className="left-half ">
+            <div className="led-display"> {sideText} </div>
+          </div>
+        )}
         <div className="right-half">
           <div className="bottom-section">
             <div

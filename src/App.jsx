@@ -179,7 +179,7 @@ function App() {
     URL.revokeObjectURL(url)
 
     // Also log to console for reference
-    console.log('Configuration Saved:', configData)
+    // console.log('Configuration Saved:', configData)
   }
 
   const DisplayConfigSection = ({ board, field }) => (

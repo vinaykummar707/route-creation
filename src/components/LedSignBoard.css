@@ -20,7 +20,7 @@
   border: 6px solid #2a2a2a;
   border-radius: 16px;
   /* width: 90%; */
-  max-width: 1000px;
+  /* max-width: 1000px; */
   margin: 10px auto;
   position: relative;
   overflow: hidden;
@@ -69,7 +69,7 @@
   border-right: 3px solid #2a2a2a;
   position: relative;
   z-index: 3;
-  padding: 10px;
+  padding: 0px 10px;
 }
 
 .right-half {
@@ -91,7 +91,9 @@
 }
 
 .bottom-section {
-  border-top: 2px solid #2a2a2a;
+  /* border-top: 2px solid #2a2a2a; */
+  display: flex;
+  align-items: center;
 }
 
 .led-display {
@@ -208,7 +210,7 @@
     transform: translateX(100%);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-200%);
   }
 }
 

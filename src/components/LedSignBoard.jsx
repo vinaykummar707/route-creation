@@ -43,7 +43,7 @@ const LedSignBoard = ({ config, selectedTab }) => {
     );
     setTopScrollSpeed(config[selectedTab]["source"].scrollSpeed);
     setBottomScrollSpeed(config[selectedTab]["via"].scrollSpeed);
-    console.log(config[selectedTab]["source"].scrollType);
+    // console.log(config[selectedTab]["source"].scrollType);
   }, [config, selectedTab]);
 
   // Convert speed value (1-10) to seconds (faster = fewer seconds)

@@ -80,7 +80,7 @@
 import { useEffect, useState } from "react";
 import "./LedSignBoard.css";
 
-const SideWithTwoTextsBoard = ({ formData }) => {
+const SideWithTwoTextsBoard = ({ route, formData }) => {
   const {
     sideText,
     upperHalfText,
@@ -97,6 +97,7 @@ const SideWithTwoTextsBoard = ({ formData }) => {
   const [lowerScrollEnabled, setLowerScrollEnabled] = useState(false);
 
   useEffect(() => {
+    // console.log("called");
     setUpperScrollEnabled(!["Fixed"].includes(upperHalfScrollType));
     setLowerScrollEnabled(!["Fixed"].includes(lowerHalfScrollType));
   }, [upperHalfScrollType, lowerHalfScrollType]);
@@ -125,11 +126,25 @@ const SideWithTwoTextsBoard = ({ formData }) => {
   };
 
   return (
-    <div className="w-full">
+    <div className="">
       <div className="led-sign-board">
-        <div className="left-half">
-          <div className="led-display">{sideText}</div>
-        </div>
+        {route.splitRoute && (
+          <div className="left-half flex flex-col">
+            <div className="top-section">
+              {" "}
+              <div className="led-display"> {formData.routeUpperHalfText} </div>
+            </div>
+            <div className="bottom-section border-t-2  border-[#ffa500]">
+              {" "}
+              <div className="led-display"> {formData.routeLowerHalfText} </div>
+            </div>
+          </div>
+        )}
+        {!route.splitRoute && (
+          <div className="left-half ">
+            <div className="led-display"> {sideText} </div>
+          </div>
+        )}
         <div className="right-half">
           <div className="top-section">
             <div
@@ -154,7 +169,7 @@ const SideWithTwoTextsBoard = ({ formData }) => {
               </span>
             </div>
           </div>
-          <div className="bottom-section">
+          <div className="bottom-section border-t-2 border-[#ffa500]">
             <div
               className={`${getPositionClass(
                 lowerHalfPosition,

@@ -22,7 +22,7 @@ const DisplaySettingsForm = ({ config, onFormUpdate }) => {
   const [selectedField, setSelectedField] = useState("routeNumber");
 
   useEffect(() => {
-    console.log("rendered");
+    // console.log("rendered");
   });
 
   const DisplayConfigSection = ({ board, field }) => (

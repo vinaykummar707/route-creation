@@ -4,22 +4,35 @@ import RouteDisplaySettings from "./RouteDisplaySettings";
 import RouteLanguageSettings from "./RouteLanguageSettings";
 import axios from "axios";
 import Bus from "./test";
+import SimulationDialog from "./SimulationDialog";
 
 const EntryPage = () => {
   const [route, setRoute] = useState({
-    routeNumber: "123",
-    source: "dummy",
-    destination: "dummy",
-    separation: "-",
-    via: "via: dummy",
+    routeNumber: "300",
+    source: "UPPAL",
+    destination: "MEHDIPATNAM",
+    separation: "TO",
+    via: "VIA: ARAMGHAR,LB NAGAR,VANASTHALIPURAM",
+    splitRoute: false,
+    routeNumberUpperHalf: "300",
+    routeNumberLowerHalf: "2A",
   });
 
   const handleRouteChange = (e) => {
-    const { name, value } = e.target;
-    setRoute((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    const { name, value, checked } = e.target;
+    // console.log(name, value, checked);
+
+    if (name === "splitRoute") {
+      setRoute((prev) => ({
+        ...prev,
+        [name]: checked,
+      }));
+    } else {
+      setRoute((prev) => ({
+        ...prev,
+        [name]: value.toUpperCase(),
+      }));
+    }
   };
 
   const languageOptions = {
@@ -45,6 +58,10 @@ const EntryPage = () => {
       fontWeight: "regular",
     },
   ]);
+
+  const [selectedBoardLanguage, setSelectedBoardLanguage] = useState(
+    languageConfig[0].language
+  );
 
   const handleLanguageConfigChange = (index, field, value) => {
     if (field === "fontSize") {
@@ -79,7 +96,7 @@ const EntryPage = () => {
 
   useEffect(() => {
     console.log(displayConfig);
-  }, [route, languageConfig, displayConfig]);
+  }, [displayConfig]);
 
   async function translateText(text, srcLang, destLang) {
     const API_URL = "https://api.devnagri.com/machine-translation/v2/translate";
@@ -170,14 +187,20 @@ const EntryPage = () => {
 
     // Wait for all promises to resolve and then log the final config
     await Promise.all(configPromises);
+    console.log(config);
 
-    console.log({ ...route, displayConfig: config });
-    generateJson({ ...route, displayConfig: config }); // The final config will be in the correct format now
+    setFinalObj({ ...route, displayConfig: config });
+
+    setShowSimulation(true);
+
+    return { ...route, displayConfig: config };
+
+    // generateJson({ ...route, displayConfig: config }); // The final config will be in the correct format now
   }
 
-  const generateJson = (configData) => {
+  const generateJson = () => {
     // Convert to JSON string with proper formatting
-    const jsonString = JSON.stringify(configData, null, 2);
+    const jsonString = JSON.stringify(finalObj, null, 2);
 
     // Create blob and download link
     const blob = new Blob([jsonString], { type: "application/json" });
@@ -203,6 +226,14 @@ const EntryPage = () => {
     (newConfig) => setDisplayConfig(newConfig),
     []
   );
+
+  const [showSimulation, setShowSimulation] = useState(false);
+  const [finalObj, setFinalObj] = useState({});
+
+  const changeBoardLanguage = ({ target }) => {
+    setSelectedBoardLanguage(target.value);
+  };
+
   return (
     <>
       <BusRoutes route={route} onRouteChange={handleRouteChange} />
@@ -211,17 +242,38 @@ const EntryPage = () => {
         languageConfig={languageConfig}
         handleLanguageConfigChange={handleLanguageConfigChange}
       />
+
       <Bus
         route={route}
         onUpdateDisplaySettings={handleUpdateDisplaySettings}
+        languageConfig={languageConfig}
+        // onBoardLanugageChange={handleBoardLanguageChange}
+        // selectedBoardLanguage={selectedBoardLanguage}
       />
 
-      <button
-        onClick={showFinalJson}
-        className="bg-indigo-600 text-sm p-3 self-starts text-white rounded-lg"
-      >
-        Export To Json
-      </button>
+      {displayConfig && showSimulation && (
+        <SimulationDialog
+          route={route}
+          showSimulation={showSimulation}
+          displayConfig={finalObj["displayConfig"]}
+          closeSimulation={() => setShowSimulation(false)}
+        />
+      )}
+      <div className="grid grid-cols-6 gap-x-4">
+        <button
+          onClick={showFinalJson}
+          className=" px-4 py-2 bg-indigo-600 text-white text-md rounded-lg"
+        >
+          Start Simulation
+        </button>
+
+        <button
+          onClick={generateJson}
+          className="bg-green-600 text-sm p-3 self-starts text-white rounded-lg"
+        >
+          Export To Drive
+        </button>
+      </div>
     </>
   );
 };

@@ -44,7 +44,7 @@ const FullScreenBoard = ({ formData }) => {
   };
 
   return (
-    <div className="w-full">
+    <div className="">
       <div className="led-sign-board">
         <div className="right-half">
           <div className="bottom-section">

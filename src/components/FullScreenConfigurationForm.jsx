@@ -7,7 +7,7 @@ const ConfigurationForm = ({ route, handleSave, selectedTab, configData }) => {
   const [formData, setFormData] = useState();
 
   useEffect(() => {
-    console.log(configData);
+    // console.log(configData);
 
     setFormData(configData);
   }, [configData]);
