@@ -1,123 +1,177 @@
 {
-    "routeNumber": "123",
-    "source": "hyderabad",
-    "destination": "vijayawada",
-    "separation": "-",
-    "via": "guntur",
-    "displayConfig": {
-        "English": {
-            "front": {
-                "text": "hyderabad - vijayawada",
-                "scrollType": "Fixed",
-                "scrollSpeed": 0,
-                "position": "Center",
-                "boardFormatType": "Fullscreen",
-                "fontSize": 16,
-                "fontWeight": "regular"
-            },
-            "side": {
-                "text": "guntur",
-                "scrollType": "Fixed",
-                "scrollSpeed": 0,
-                "position": "Center",
-                "boardFormatType": "Fullscreen",
-                "fontSize": 16,
-                "fontWeight": "regular"
-            },
-            "rear": {
-                "text": "hyderabad - vijayawada",
-                "scrollType": "Fixed",
-                "scrollSpeed": 0,
-                "position": "Center",
-                "boardFormatType": "Fullscreen",
-                "fontSize": 16,
-                "fontWeight": "regular"
-            },
-            "internal": {
-                "text": "123",
-                "scrollType": "Fixed",
-                "scrollSpeed": 0,
-                "position": "Center",
-                "boardFormatType": "Fullscreen",
-                "fontSize": 16,
-                "fontWeight": "regular"
-            }
-        },
-        "Telugu": {
-            "front": {
-                "text": "హైదరాబాద్-విజయవాడ",
-                "scrollType": "Fixed",
-                "scrollSpeed": 0,
-                "position": "Center",
-                "boardFormatType": "Fullscreen",
-                "fontSize": 16,
-                "fontWeight": "regular"
-            },
-            "side": {
-                "text": "గుంటుర్",
-                "scrollType": "Fixed",
-                "scrollSpeed": 0,
-                "position": "Center",
-                "boardFormatType": "Fullscreen",
-                "fontSize": 16,
-                "fontWeight": "regular"
-            },
-            "rear": {
-                "text": "హైదరాబాద్-విజయవాడ",
-                "scrollType": "Fixed",
-                "scrollSpeed": 0,
-                "position": "Center",
-                "boardFormatType": "Fullscreen",
-                "fontSize": 16,
-                "fontWeight": "regular"
-            },
-            "internal": {
-                "text": "123",
-                "scrollType": "Fixed",
-                "scrollSpeed": 0,
-                "position": "Center",
-                "boardFormatType": "Fullscreen",
-                "fontSize": 16,
-                "fontWeight": "regular"
-            }
-        },
-        "Hindi": {
-            "front": {
-                "text": "हैदराबाद-विजयवाड़ा",
-                "scrollType": "Fixed",
-                "scrollSpeed": 0,
-                "position": "Center",
-                "boardFormatType": "Fullscreen",
-                "fontSize": 16,
-                "fontWeight": "regular"
-            },
-            "side": {
-                "text": "गुंटूर",
-                "scrollType": "Fixed",
-                "scrollSpeed": 0,
-                "position": "Center",
-                "boardFormatType": "Fullscreen",
-                "fontSize": 16,
-                "fontWeight": "regular"
-            },
-            "rear": {
-                "text": "हैदराबाद-विजयवाड़ा",
-                "scrollType": "Fixed",
-                "scrollSpeed": 0,
-                "position": "Center",
-                "boardFormatType": "Fullscreen",
-                "fontSize": 16,
-                "fontWeight": "regular"
-            },
-            "internal": {
-                "text": "123",
-                "scrollType": "Fixed",
-                "scrollSpeed": 0,
-                "position": "Center",
-                "boardFormatType": "Fullscreen",
-                "fontSize": 16,
-                "fontWeight": "regular"
-            }
-        }
+  "routeNumber": "300",
+  "source": "UPPAL",
+  "destination": "MEHDIPATNAM",
+  "separation": "TO",
+  "via": "VIA: ARAMGHAR,LB NAGAR,VANASTHALIPURAM",
+  "splitRoute": false,
+  "routeNumberUpperHalf": "300",
+  "routeNumberLowerHalf": "2A",
+  "displayConfig": {
+    "English": {
+      "front": {
+        "boardFormatType": "Fullscreen",
+        "text": "UPPAL TO MEHDIPATNAM",
+        "scrollType": "Fixed",
+        "scrollSpeed": 0,
+        "position": "Center",
+        "fontSize": 16,
+        "fontWeight": "regular"
+      },
+      "side": {
+        "boardFormatType": "sideWithSingleText",
+        "sideText": "300",
+        "text": "UPPAL TO MEHDIPATNAM VIA: ARAMGHAR,LB NAGAR,VANASTHALIPURAM",
+        "scrollType": "Fixed",
+        "scrollSpeed": 0,
+        "position": "Center",
+        "routeUpperHalfText": "300",
+        "routeLowerHalfText": "2A",
+        "fontSize": 16,
+        "fontWeight": "regular"
+      },
+      "rear": {
+        "boardFormatType": "sideWithTwoTexts",
+        "sideText": "300",
+        "upperHalfText": "UPPAL TO MEHDIPATNAM",
+        "upperHalfScrollType": "Fixed",
+        "upperHalfScrollSpeed": 0,
+        "upperHalfPosition": "Center",
+        "lowerHalfText": "VIA: ARAMGHAR,LB NAGAR,VANASTHALIPURAM",
+        "lowerHalfScrollType": "Fixed",
+        "lowerHalfScrollSpeed": 0,
+        "lowerHalfPosition": "Center",
+        "routeUpperHalfText": "300",
+        "routeLowerHalfText": "2A",
+        "fontSize": 16,
+        "fontWeight": "regular"
+      },
+      "internal": {
+        "boardFormatType": "sideWithTwoTexts",
+        "sideText": "300",
+        "upperHalfText": "UPPAL TO MEHDIPATNAM",
+        "upperHalfScrollType": "Fixed",
+        "upperHalfScrollSpeed": 0,
+        "upperHalfPosition": "Center",
+        "lowerHalfText": "VIA: ARAMGHAR,LB NAGAR,VANASTHALIPURAM",
+        "lowerHalfScrollType": "Fixed",
+        "lowerHalfScrollSpeed": 0,
+        "lowerHalfPosition": "Center",
+        "routeUpperHalfText": "300",
+        "routeLowerHalfText": "2A",
+        "fontSize": 16,
+        "fontWeight": "regular"
+      }
+    },
+    "Hindi": {
+      "front": {
+        "boardFormatType": "Fullscreen",
+        "text": "UPPAL TO MEHDIPATNAM",
+        "scrollType": "Fixed",
+        "scrollSpeed": 0,
+        "position": "Center",
+        "fontSize": 16,
+        "fontWeight": "regular"
+      },
+      "side": {
+        "boardFormatType": "sideWithSingleText",
+        "sideText": "300",
+        "text": "UPPAL TO MEHDIPATNAM VIA: ARAMGHAR,LB NAGAR,VANASTHALIPURAM",
+        "scrollType": "Fixed",
+        "scrollSpeed": 0,
+        "position": "Center",
+        "routeUpperHalfText": "300",
+        "routeLowerHalfText": "2A",
+        "fontSize": 16,
+        "fontWeight": "regular"
+      },
+      "rear": {
+        "boardFormatType": "sideWithTwoTexts",
+        "sideText": "300",
+        "upperHalfText": "UPPAL TO MEHDIPATNAM",
+        "upperHalfScrollType": "Fixed",
+        "upperHalfScrollSpeed": 0,
+        "upperHalfPosition": "Center",
+        "lowerHalfText": "VIA: ARAMGHAR,LB NAGAR,VANASTHALIPURAM",
+        "lowerHalfScrollType": "Fixed",
+        "lowerHalfScrollSpeed": 0,
+        "lowerHalfPosition": "Center",
+        "routeUpperHalfText": "300",
+        "routeLowerHalfText": "2A",
+        "fontSize": 16,
+        "fontWeight": "regular"
+      },
+      "internal": {
+        "boardFormatType": "sideWithTwoTexts",
+        "sideText": "300",
+        "upperHalfText": "UPPAL TO MEHDIPATNAM",
+        "upperHalfScrollType": "Fixed",
+        "upperHalfScrollSpeed": 0,
+        "upperHalfPosition": "Center",
+        "lowerHalfText": "VIA: ARAMGHAR,LB NAGAR,VANASTHALIPURAM",
+        "lowerHalfScrollType": "Fixed",
+        "lowerHalfScrollSpeed": 0,
+        "lowerHalfPosition": "Center",
+        "routeUpperHalfText": "300",
+        "routeLowerHalfText": "2A",
+        "fontSize": 16,
+        "fontWeight": "regular"
+      }
+    },
+    "Telugu": {
+      "front": {
+        "boardFormatType": "Fullscreen",
+        "text": "UPPAL TO MEHDIPATNAM",
+        "scrollType": "Fixed",
+        "scrollSpeed": 0,
+        "position": "Center",
+        "fontSize": 16,
+        "fontWeight": "regular"
+      },
+      "side": {
+        "boardFormatType": "sideWithSingleText",
+        "sideText": "300",
+        "text": "UPPAL TO MEHDIPATNAM VIA: ARAMGHAR,LB NAGAR,VANASTHALIPURAM",
+        "scrollType": "Fixed",
+        "scrollSpeed": 0,
+        "position": "Center",
+        "routeUpperHalfText": "300",
+        "routeLowerHalfText": "2A",
+        "fontSize": 16,
+        "fontWeight": "regular"
+      },
+      "rear": {
+        "boardFormatType": "sideWithTwoTexts",
+        "sideText": "300",
+        "upperHalfText": "UPPAL TO MEHDIPATNAM",
+        "upperHalfScrollType": "Fixed",
+        "upperHalfScrollSpeed": 0,
+        "upperHalfPosition": "Center",
+        "lowerHalfText": "VIA: ARAMGHAR,LB NAGAR,VANASTHALIPURAM",
+        "lowerHalfScrollType": "Fixed",
+        "lowerHalfScrollSpeed": 0,
+        "lowerHalfPosition": "Center",
+        "routeUpperHalfText": "300",
+        "routeLowerHalfText": "2A",
+        "fontSize": 16,
+        "fontWeight": "regular"
+      },
+      "internal": {
+        "boardFormatType": "sideWithTwoTexts",
+        "sideText": "300",
+        "upperHalfText": "UPPAL TO MEHDIPATNAM",
+        "upperHalfScrollType": "Fixed",
+        "upperHalfScrollSpeed": 0,
+        "upperHalfPosition": "Center",
+        "lowerHalfText": "VIA: ARAMGHAR,LB NAGAR,VANASTHALIPURAM",
+        "lowerHalfScrollType": "Fixed",
+        "lowerHalfScrollSpeed": 0,
+        "lowerHalfPosition": "Center",
+        "routeUpperHalfText": "300",
+        "routeLowerHalfText": "2A",
+        "fontSize": 16,
+        "fontWeight": "regular"
+      }
     }
+  }
 }

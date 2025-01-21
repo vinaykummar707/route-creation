@@ -35,12 +35,6 @@ const EntryPage = () => {
     }
   };
 
-  const languageOptions = {
-    languages: ["English", "Hindi", "Marathi", "Telugu"],
-    fontSize: 20,
-    fontWeights: ["regular", "bold"],
-  };
-
   const [languageConfig, setLanguageConfig] = useState([
     {
       language: "English",
@@ -88,8 +82,32 @@ const EntryPage = () => {
   const languageMapping = {
     English: "en", // ISO code for English
     Hindi: "hi", // ISO code for Hindi
-    Telugu: "te",
-    Marathi: "mr", // ISO code for Telugu
+    Telugu: "te", // ISO code for Telugu
+    Marathi: "mr", // ISO code for Marathi
+    Bengali: "bn", // ISO code for Bengali
+    Tamil: "ta", // ISO code for Tamil
+    Gujarati: "gu", // ISO code for Gujarati
+    Kannada: "kn", // ISO code for Kannada
+    Malayalam: "ml", // ISO code for Malayalam
+    Punjabi: "pa", // ISO code for Punjabi
+    Assamese: "as", // ISO code for Assamese
+    Odia: "or", // ISO code for Odia
+    Urdu: "ur", // ISO code for Urdu
+    Konkani: "kok", // ISO code for Konkani
+    Sanskrit: "sa", // ISO code for Sanskrit
+    Maithili: "mai", // ISO code for Maithili
+    Bodo: "brx", // ISO code for Bodo
+    Santali: "sat", // ISO code for Santali
+    Kashmiri: "ks", // ISO code for Kashmiri
+    Sindhi: "sd", // ISO code for Sindhi
+    Dogri: "doi", // ISO code for Dogri
+    Manipuri: "mni", // ISO code for Manipuri (Meitei)
+  };
+
+  const languageOptions = {
+    languages: Object.keys(languageMapping),
+    fontSize: 20,
+    fontWeights: ["regular", "bold"],
   };
 
   const [displayConfig, setDisplayConfig] = useState({});
@@ -187,7 +205,7 @@ const EntryPage = () => {
 
     // Wait for all promises to resolve and then log the final config
     await Promise.all(configPromises);
-    console.log(config);
+    console.log({ ...route, displayConfig: config });
 
     setFinalObj({ ...route, displayConfig: config });
 

@@ -126,7 +126,7 @@ const SideWithTwoTextsBoard = ({ route, formData }) => {
   };
 
   return (
-    <div className="">
+    <div className="w-full">
       <div className="led-sign-board">
         {route.splitRoute && (
           <div className="left-half flex flex-col">
