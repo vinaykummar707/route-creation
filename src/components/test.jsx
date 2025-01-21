@@ -98,7 +98,7 @@ const Bus = memo(
       };
 
       return (
-        <div className="flex flex-col gap-4 px-6 py-6 shadow-sm bg-white w-full items-start rounded-lg border border-neutral-400">
+        <div className="flex flex-col gap-4 px-6 py-6 shadow-sm bg-white w-full items-start rounded-lg border border-neutral-300">
           <div className="flex w-full flex-row justify-between items-center">
             <h1 className="text-lg text-neutral-800 font-bold">
               Route Display Settings
@@ -112,7 +112,7 @@ const Bus = memo(
               <select
                 value={selectedLanguage}
                 onChange={onlanguagechange}
-                className="border border-neutral-400 text-neutral-900 text-sm p-2 rounded-lg"
+                className="border border-neutral-300 text-neutral-900 text-sm p-2 rounded-lg"
               >
                 {languageConfig.map((language) => (
                   <option key={language.language} value={language.language}>
@@ -124,10 +124,10 @@ const Bus = memo(
             </div> */}
           </div>
 
-          <div className="grid grid-cols-2 gap-x-4 w-full gap-y-4">
+          <div className="grid grid-cols-2  gap-x-4 w-full gap-y-4">
             {Object.keys(config).map((side) => (
               <div
-                className="flex flex-col w-full  rounded-lg p-2 gap-2"
+                className="flex flex-col w-full bg-neutral-200 p-4  rounded-lg  gap-2"
                 key={side}
               >
                 <h3 className="text-sm font-bold">
@@ -138,7 +138,7 @@ const Bus = memo(
                   onChange={(e) =>
                     handleChange(side, "boardFormatType", e.target.value)
                   }
-                  className="border border-neutral-400 text-neutral-900 text-sm p-2 rounded-lg"
+                  className="border border-neutral-300 text-neutral-900 text-sm p-2 rounded-lg"
                 >
                   {boardFormatTypes.map((type) => (
                     <option key={type} value={type}>
@@ -198,18 +198,18 @@ const Bus = memo(
                   placeholder="Text"
                   value={config.text || ""}
                   onChange={(e) => updateConfig("text", e.target.value)}
-                  className="border border-neutral-400 text-neutral-900 text-sm p-2 rounded-lg"
+                  className="border border-neutral-300 text-neutral-900 text-sm p-2 rounded-lg"
                 />
               </div>
 
               <div className="flex flex-col gap-1">
                 <label className="text-sm text-neutral-900" htmlFor="">
-                  scrollType
+                  Scroll Type
                 </label>
                 <select
                   value={config.scrollType || "Fixed"}
                   onChange={(e) => updateConfig("scrollType", e.target.value)}
-                  className="border border-neutral-400 text-neutral-900 text-sm p-2 rounded-lg"
+                  className="border border-neutral-300 text-neutral-900 text-sm p-2 rounded-lg"
                 >
                   <option value="Fixed">Fixed</option>
                   <option value="Left To Right">Left to Right</option>
@@ -220,7 +220,7 @@ const Bus = memo(
 
               <div className="flex flex-col gap-1">
                 <label className="text-sm text-neutral-900" htmlFor="">
-                  scrollSpeed
+                  Scroll Speed
                 </label>
                 <input
                   type="number"
@@ -229,18 +229,18 @@ const Bus = memo(
                   onChange={(e) =>
                     updateConfig("scrollSpeed", Number(e.target.value))
                   }
-                  className="border border-neutral-400 text-neutral-900 text-sm p-2 rounded-lg"
+                  className="border border-neutral-300 text-neutral-900 text-sm p-2 rounded-lg"
                 />
               </div>
 
               <div className="flex flex-col gap-1">
                 <label className="text-sm text-neutral-900" htmlFor="">
-                  position
+                  Position
                 </label>
                 <select
                   value={config.position || "center"}
                   onChange={(e) => updateConfig("position", e.target.value)}
-                  className="border border-neutral-400 text-neutral-900 text-sm p-2 rounded-lg"
+                  className="border border-neutral-300 text-neutral-900 text-sm p-2 rounded-lg"
                 >
                   <option value="Left">Left</option>
                   <option value="Center">Center</option>
@@ -264,7 +264,7 @@ const Bus = memo(
                   maxLength={7}
                   disabled
                   value={config.sideText || ""}
-                  className="border border-neutral-400 text-neutral-900 text-sm p-2 rounded-lg"
+                  className="border border-neutral-300 text-neutral-900 text-sm p-2 rounded-lg"
                 />
               </div>
             )}
@@ -280,7 +280,7 @@ const Bus = memo(
                     maxLength={4}
                     disabled
                     value={config.routeUpperHalfText || ""}
-                    className="border border-neutral-400 text-neutral-900 text-sm p-2 rounded-lg"
+                    className="border border-neutral-300 text-neutral-900 text-sm p-2 rounded-lg"
                   />
                 </div>
 
@@ -294,32 +294,32 @@ const Bus = memo(
                     maxLength={4}
                     disabled
                     value={config.routeLowerHalfText || ""}
-                    className="border border-neutral-400 text-neutral-900 text-sm p-2 rounded-lg"
+                    className="border border-neutral-300 text-neutral-900 text-sm p-2 rounded-lg"
                   />
                 </div>
               </>
             )}
             <div className="flex flex-col gap-1">
               <label className="text-sm text-neutral-900" htmlFor="">
-                text
+                Text
               </label>
               <input
                 type="text"
                 placeholder="Text"
                 value={config.text || ""}
                 onChange={(e) => updateConfig("text", e.target.value)}
-                className="border border-neutral-400 text-neutral-900 text-sm p-2 rounded-lg"
+                className="border border-neutral-300 text-neutral-900 text-sm p-2 rounded-lg"
               />
             </div>
 
             <div className="flex flex-col gap-1">
               <label className="text-sm text-neutral-900" htmlFor="">
-                scrollType
+                Scroll Type
               </label>
               <select
                 value={config.scrollType || "Fixed"}
                 onChange={(e) => updateConfig("scrollType", e.target.value)}
-                className="border border-neutral-400 text-neutral-900 text-sm p-2 rounded-lg"
+                className="border border-neutral-300 text-neutral-900 text-sm p-2 rounded-lg"
               >
                 <option value="Fixed">Fixed</option>
                 <option value="Left To Right">Left to Right</option>
@@ -330,7 +330,7 @@ const Bus = memo(
 
             <div className="flex flex-col gap-1">
               <label className="text-sm text-neutral-900" htmlFor="">
-                scrollSpeed
+                Scroll Speed
               </label>
               <input
                 type="number"
@@ -339,7 +339,7 @@ const Bus = memo(
                 onChange={(e) =>
                   updateConfig("scrollSpeed", Number(e.target.value))
                 }
-                className="border border-neutral-400 text-neutral-900 text-sm p-2 rounded-lg"
+                className="border border-neutral-300 text-neutral-900 text-sm p-2 rounded-lg"
               />
             </div>
 
@@ -350,7 +350,7 @@ const Bus = memo(
               <select
                 value={config.position || "center"}
                 onChange={(e) => updateConfig("position", e.target.value)}
-                className="border border-neutral-400 text-neutral-900 text-sm p-2 rounded-lg"
+                className="border border-neutral-300 text-neutral-900 text-sm p-2 rounded-lg"
               >
                 <option value="Left">Left</option>
                 <option value="Center">Center</option>
@@ -363,116 +363,182 @@ const Bus = memo(
         return (
           <div className="flex flex-col gap-2">
             {!route.splitRoute && (
-              <input
-                type="text"
-                placeholder="Side Text"
-                maxLength={7}
-                disabled
-                value={config.sideText || ""}
-                className="border border-neutral-400 text-neutral-900 text-sm p-2 rounded-lg"
-              />
+              <div className="flex flex-col gap-1">
+                <label className="text-sm text-neutral-900" htmlFor="">
+                  Side Text
+                </label>
+                <input
+                  type="text"
+                  placeholder="Side Text"
+                  maxLength={7}
+                  disabled
+                  value={config.sideText || ""}
+                  className="border border-neutral-300 text-neutral-900 text-sm p-2 rounded-lg"
+                />
+              </div>
             )}
             {route.splitRoute && (
               <>
-                <input
-                  type="text"
-                  placeholder="Side Text"
-                  maxLength={4}
-                  disabled
-                  value={config.routeUpperHalfText || ""}
-                  className="border border-neutral-400 text-neutral-900 text-sm p-2 rounded-lg"
-                />
-                <input
-                  type="text"
-                  placeholder="Side Text"
-                  maxLength={4}
-                  disabled
-                  value={config.routeLowerHalfText || ""}
-                  className="border border-neutral-400 text-neutral-900 text-sm p-2 rounded-lg"
-                />
+                <div className="flex flex-col gap-1">
+                  <label className="text-sm text-neutral-900" htmlFor="">
+                    Route Upper Half Text
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Side Text"
+                    maxLength={4}
+                    disabled
+                    value={config.routeUpperHalfText || ""}
+                    className="border border-neutral-300 text-neutral-900 text-sm p-2 rounded-lg"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-1">
+                  <label className="text-sm text-neutral-900" htmlFor="">
+                    Route Lower Half Text
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Side Text"
+                    maxLength={4}
+                    disabled
+                    value={config.routeLowerHalfText || ""}
+                    className="border border-neutral-300 text-neutral-900 text-sm p-2 rounded-lg"
+                  />
+                </div>
               </>
             )}
             <div className="grid grid-cols-2 gap-4">
-              <input
-                type="text"
-                placeholder="Upper Half Text"
-                value={config.upperHalfText || ""}
-                onChange={(e) => updateConfig("upperHalfText", e.target.value)}
-                className="border border-neutral-400 text-neutral-900 text-sm p-2 rounded-lg"
-              />
-              <select
-                value={config.upperHalfScrollType || "Fixed"}
-                onChange={(e) =>
-                  updateConfig("upperHalfScrollType", e.target.value)
-                }
-                className="border border-neutral-400 text-neutral-900 text-sm p-2 rounded-lg"
-              >
-                <option value="Fixed">Fixed</option>
-                <option value="Left To Right">Left to Right</option>
-                <option value="Right To Left">Right to Left</option>
-                <option value="Flicker">Flicker</option>
-              </select>
-              <input
-                type="number"
-                placeholder="Upper Half Scroll Speed"
-                value={config.upperHalfScrollSpeed || 0}
-                onChange={(e) =>
-                  updateConfig("upperHalfScrollSpeed", Number(e.target.value))
-                }
-                className="border border-neutral-400 text-neutral-900 text-sm p-2 rounded-lg"
-              />
-              <select
-                value={config.upperHalfPosition || "top"}
-                onChange={(e) =>
-                  updateConfig("upperHalfPosition", e.target.value)
-                }
-                className="border border-neutral-400 text-neutral-900 text-sm p-2 rounded-lg"
-              >
-                <option value="Left">Left</option>
-                <option value="Center">Center</option>
-                <option value="Right">Right</option>
-              </select>
+              <div className="flex flex-col gap-1">
+                <label className="text-sm text-neutral-900" htmlFor="">
+                  Upper Half Text
+                </label>
+                <input
+                  type="text"
+                  placeholder="Upper Half Text"
+                  value={config.upperHalfText || ""}
+                  onChange={(e) =>
+                    updateConfig("upperHalfText", e.target.value)
+                  }
+                  className="border border-neutral-300 text-neutral-900 text-sm p-2 rounded-lg"
+                />
+              </div>
+
+              <div className="flex flex-col gap-1">
+                <label className="text-sm text-neutral-900" htmlFor="">
+                  Upper Half Scroll Type
+                </label>
+                <select
+                  value={config.upperHalfScrollType || "Fixed"}
+                  onChange={(e) =>
+                    updateConfig("upperHalfScrollType", e.target.value)
+                  }
+                  className="border border-neutral-300 text-neutral-900 text-sm p-2 rounded-lg"
+                >
+                  <option value="Fixed">Fixed</option>
+                  <option value="Left To Right">Left to Right</option>
+                  <option value="Right To Left">Right to Left</option>
+                  <option value="Flicker">Flicker</option>
+                </select>
+              </div>
+
+              <div className="flex flex-col gap-1">
+                <label className="text-sm text-neutral-900" htmlFor="">
+                  Upper Half Scroll Speed
+                </label>
+                <input
+                  type="number"
+                  placeholder="Upper Half Scroll Speed"
+                  value={config.upperHalfScrollSpeed || 0}
+                  onChange={(e) =>
+                    updateConfig("upperHalfScrollSpeed", Number(e.target.value))
+                  }
+                  className="border border-neutral-300 text-neutral-900 text-sm p-2 rounded-lg"
+                />
+              </div>
+
+              <div className="flex flex-col gap-1">
+                <label className="text-sm text-neutral-900" htmlFor="">
+                  Upper Half Position
+                </label>
+                <select
+                  value={config.upperHalfPosition || "top"}
+                  onChange={(e) =>
+                    updateConfig("upperHalfPosition", e.target.value)
+                  }
+                  className="border border-neutral-300 text-neutral-900 text-sm p-2 rounded-lg"
+                >
+                  <option value="Left">Left</option>
+                  <option value="Center">Center</option>
+                  <option value="Right">Right</option>
+                </select>
+              </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
-              <input
-                type="text"
-                placeholder="Lower Half Text"
-                value={config.lowerHalfText || ""}
-                onChange={(e) => updateConfig("lowerHalfText", e.target.value)}
-                className="border border-neutral-400 text-neutral-900 text-sm p-2 rounded-lg"
-              />
-              <select
-                value={config.lowerHalfScrollType || "Fixed"}
-                onChange={(e) =>
-                  updateConfig("lowerHalfScrollType", e.target.value)
-                }
-                className="border border-neutral-400 text-neutral-900 text-sm p-2 rounded-lg"
-              >
-                <option value="Fixed">Fixed</option>
-                <option value="Left To Right">Left to Right</option>
-                <option value="Right To Left">Right to Left</option>
-                <option value="Flicker">Flicker</option>
-              </select>
-              <input
-                type="number"
-                placeholder="Lower Half Scroll Speed"
-                value={config.lowerHalfScrollSpeed || 0}
-                onChange={(e) =>
-                  updateConfig("lowerHalfScrollSpeed", Number(e.target.value))
-                }
-                className="border border-neutral-400 text-neutral-900 text-sm p-2 rounded-lg"
-              />
-              <select
-                value={config.lowerHalfPosition || "bottom"}
-                onChange={(e) =>
-                  updateConfig("lowerHalfPosition", e.target.value)
-                }
-                className="border border-neutral-400 text-neutral-900 text-sm p-2 rounded-lg"
-              >
-                <option value="Left">Left</option>
-                <option value="Center">Center</option>
-                <option value="Right">Right</option>
-              </select>
+              <div className="flex flex-col gap-1">
+                <label className="text-sm text-neutral-900" htmlFor="">
+                  Lower Half Text
+                </label>
+                <input
+                  type="text"
+                  placeholder="Lower Half Text"
+                  value={config.lowerHalfText || ""}
+                  onChange={(e) =>
+                    updateConfig("lowerHalfText", e.target.value)
+                  }
+                  className="border border-neutral-300 text-neutral-900 text-sm p-2 rounded-lg"
+                />
+              </div>
+
+              <div className="flex flex-col gap-1">
+                <label className="text-sm text-neutral-900" htmlFor="">
+                  Lower Half Scroll Type
+                </label>
+                <select
+                  value={config.lowerHalfScrollType || "Fixed"}
+                  onChange={(e) =>
+                    updateConfig("lowerHalfScrollType", e.target.value)
+                  }
+                  className="border border-neutral-300 text-neutral-900 text-sm p-2 rounded-lg"
+                >
+                  <option value="Fixed">Fixed</option>
+                  <option value="Left To Right">Left to Right</option>
+                  <option value="Right To Left">Right to Left</option>
+                  <option value="Flicker">Flicker</option>
+                </select>
+              </div>
+
+              <div className="flex flex-col gap-1">
+                <label className="text-sm text-neutral-900" htmlFor="">
+                  Lower Half Scroll Speed
+                </label>
+                <input
+                  type="number"
+                  placeholder="Lower Half Scroll Speed"
+                  value={config.lowerHalfScrollSpeed || 0}
+                  onChange={(e) =>
+                    updateConfig("lowerHalfScrollSpeed", Number(e.target.value))
+                  }
+                  className="border border-neutral-300 text-neutral-900 text-sm p-2 rounded-lg"
+                />
+              </div>
+
+              <div className="flex flex-col gap-1">
+                <label className="text-sm text-neutral-900" htmlFor="">
+                  Lower Half Position
+                </label>
+                <select
+                  value={config.lowerHalfPosition || "bottom"}
+                  onChange={(e) =>
+                    updateConfig("lowerHalfPosition", e.target.value)
+                  }
+                  className="border border-neutral-300 text-neutral-900 text-sm p-2 rounded-lg"
+                >
+                  <option value="Left">Left</option>
+                  <option value="Center">Center</option>
+                  <option value="Right">Right</option>
+                </select>
+              </div>
             </div>
           </div>
         );

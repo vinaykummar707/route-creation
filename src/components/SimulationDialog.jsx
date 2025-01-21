@@ -32,7 +32,7 @@ const SimulationDialog = ({
               <select
                 value={selectedLanguage}
                 onChange={(e) => setSelectedLanguage(e.target.value)}
-                className="border-neutral-400 text-neutral-900 text-sm p-2 rounded-lg"
+                className="border-neutral-300 text-neutral-900 text-sm p-2 rounded-lg"
               >
                 {Object.keys(displayConfig).map((language) => (
                   <option key={language} value={language}>

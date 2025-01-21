@@ -7,7 +7,7 @@ const RouteLanguageSettings = ({
 }) => {
   return (
     <div className="">
-      <div className="flex flex-col gap-8 p-4 bg-white w-full items-start rounded-lg border border-neutral-400">
+      <div className="flex flex-col gap-8 p-4 bg-white w-full items-start rounded-lg border border-neutral-300">
         <h1 className="text-lg text-neutral-800 font-bold">
           Route Language Settings
         </h1>
@@ -26,7 +26,7 @@ const RouteLanguageSettings = ({
               </label>
               <select
                 name="language"
-                className="border border-neutral-400 text-neutral-900 text-sm p-2 rounded-lg"
+                className="border border-neutral-300 text-neutral-900 text-sm p-2 rounded-lg"
                 required
                 defaultValue={config.language}
                 onChange={(e) =>
@@ -51,7 +51,7 @@ const RouteLanguageSettings = ({
 							<select
 								name="fontFamily"
 								defaultValue={config.fontFamily}
-								className="border border-neutral-400 text-neutral-900 text-sm p-2 rounded-lg"
+								className="border border-neutral-300 text-neutral-900 text-sm p-2 rounded-lg"
 								required
 								onChange={(e) =>
 									handleLanguageConfigChange(
@@ -78,7 +78,7 @@ const RouteLanguageSettings = ({
               </label>
               <select
                 name="fontWeight"
-                className="border border-neutral-400 text-neutral-900 text-sm p-2 rounded-lg"
+                className="border border-neutral-300 text-neutral-900 text-sm p-2 rounded-lg"
                 required
                 defaultValue={config.fontWeight}
                 onChange={(e) =>
@@ -110,7 +110,7 @@ const RouteLanguageSettings = ({
                 name="fontSize"
                 type="number"
                 defaultValue={config.fontSize}
-                className="border border-neutral-400 text-neutral-900 text-sm p-2 rounded-lg"
+                className="border border-neutral-300 text-neutral-900 text-sm p-2 rounded-lg"
                 onChange={(e) =>
                   handleLanguageConfigChange(index, "fontSize", e.target.value)
                 }
